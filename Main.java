@@ -23,16 +23,31 @@ public class Main {
 				String enter=lector.next();
 				
 				//aqui se llaman a los metodos para trabajar
-				persona.derecha(persona.analizar());
+				//tsid
+				
+				if (persona.analizar().substring(0,1).equals("c"))
+				{
+					persona.arriba(persona.analizar());
+				}
+				
+				else if(persona.analizar().substring(2,3).equals("c"))
+				{
 				persona.izquierda(persona.analizar());
-				persona.arriba(persona.analizar());
+				}
+				
+				else if(persona.analizar().substring(1,2).equals("c"))
+				{
 				persona.abajo(persona.analizar());
+				}
 				
-				
-				
-				
+				else if (persona.analizar().substring(3,4).equals("c"))
+				{
+				persona.derecha(persona.analizar());
+				}
+			
 			}
 	
 	}
 	
 }
+
