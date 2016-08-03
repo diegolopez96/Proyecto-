@@ -28,6 +28,7 @@ public class Robot{
 	{
 	x=1;
 	y=1;
+	laberinto[x][y]="x";
 	}
 	
 	public void printLaberinto()
@@ -37,7 +38,31 @@ public class Robot{
 			//for(int posicion=0;posicion<vector.length();posicion++)
 			for(int j=0;j<laberinto[i].length;j++)
 			{
-				System.out.print(laberinto[i][j]);
+				
+				if (laberinto[i][j].equals("0"))
+				{
+					//System.out.print(laberinto[i][j]);
+					System.out.print("#");
+				}
+				
+				if (laberinto[i][j].equals("1"))
+				{
+					//System.out.print(laberinto[i][j]);
+					System.out.print(" ");
+				}
+				
+				if (laberinto[i][j].equals("x"))
+				{
+					//System.out.print(laberinto[i][j]);
+					System.out.print("*");
+				}
+				
+				
+				
+			
+			
+			
+			
 			}
 			System.out.println("");
 		}
@@ -52,10 +77,10 @@ public class Robot{
 	 {
 		x= x+1;
 		mov=3;
-		
+		laberinto[x][y]="x";
+		laberinto[x-1][y]="1";
 	 }
-	 laberinto[x][y]="x";
-	 laberinto[x-1][y]="1";
+	 
 	}
 	
 	public void izquierda(String respuesta)
@@ -64,9 +89,10 @@ public class Robot{
 	 {
 		x= x-1;
 		mov=1;
+		laberinto[x][y]="x";
+		laberinto[x+1][y]="1";
 	 }
-	 laberinto[x][y]="x";
-	 laberinto[x+1][y]="1";
+	 
 	}
 	
 	public void arriba (String respuesta)
@@ -75,9 +101,10 @@ public class Robot{
 	 {
 		y= y+1;
 		mov=0;
+		laberinto[x][y]="x";
+		laberinto[x][y-1]="1";
 	 }	
-	 laberinto[x][y]="x";
-	 laberinto[x][y-1]="1";
+	
 	}
 	
 	public void abajo(String respuesta)
@@ -86,9 +113,10 @@ public class Robot{
 	 {
 		y= y-1;
 		mov=2;
+		laberinto[x][y]="x";
+		laberinto[x][y+1]="1";
 	 }
-	 laberinto[x][y]="x";
-	 laberinto[x][y+1]="1";
+	 
 	}
 	
 	public String analizar ()
