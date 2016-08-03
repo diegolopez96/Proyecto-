@@ -9,26 +9,28 @@ public class Robot{
 	
 	String [] [] laberinto=  {{"0","0","0","0","0","0"}, //0=pared 1=camino
 						     {"0","1","0","0","0","0"},
-						     {"0","1","1","1","0","0"},
-						     {"0","0","0","1","0","0"},
-							 {"0","0","0","1","1","0"},
+						     {"0","1","0","0","0","0"},
+						     {"0","1","0","0","0","0"},
+							 {"0","1","1","1","Y","0"},
 							 {"0","0","0","0","0","0"}};
 	
 	
 	
-	public int x;
-	public int y; 
+	public int x;//posicion en el mapa/laberinto x
+	public int y; //posicion en el mapa/laberinto y
 	public int mov; //nos dice cual fue el ultimo movimiento
-	
-	
-	
-	
+	public int gx; //Posicion x de la salida del laberinto
+	public int gy; //Posicion y de la salida del laberinto
 	
 	public Robot()
 	{
 	x=1;
 	y=1;
+	gx=4;
+	gy=4;
 	laberinto[x][y]="x";
+	laberinto[gx][gy]="Y";
+	
 	}
 	
 	public void printLaberinto()
@@ -57,17 +59,22 @@ public class Robot{
 					System.out.print("*");
 				}
 				
-				
-				
-			
-			
-			
-			
+				if (laberinto[i][j].equals("Y"))
+				{
+					//System.out.print(laberinto[i][j]);
+					System.out.print("Y");
+				}
 			}
 			System.out.println("");
 		}
 	}
 	
+	
+	
+	public int getmov()
+	{
+		return mov;
+	}
 	
 	
 	// banderas techo=0  oeste=1 sur=2 este=3
@@ -167,13 +174,9 @@ public class Robot{
 			paredder="c";
 		}
 		
-		respuesta=techo+suelo+paredizq+paredder;
+		//respuesta=techo+suelo+paredizq+paredder;
 		return respuesta;
 	}
-	
-	
-	
-	
-	
-	
+		
 }
+
