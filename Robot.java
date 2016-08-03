@@ -8,10 +8,10 @@ public class Robot{
 	//private String [][] laberinto; //laberinto para comparar en metodo analizar
 	
 	String [] [] laberinto=  {{"0","0","0","0","0","0"}, //0=pared 1=camino
-						     {"0","1","1","1","1","0"},
-						     {"0","1","0","0","0","0"},
-						     {"0","1","0","0","0","0"},
-							 {"0","1","1","1","1","0"},
+						     {"0","1","1","1","0","0"},
+						     {"0","1","0","1","0","0"},
+						     {"0","1","0","1","0","0"},
+							 {"0","1","0","1","1","0"},
 							 {"0","0","0","0","0","0"}};
 	
 	
@@ -21,16 +21,21 @@ public class Robot{
 	public int mov; //nos dice cual fue el ultimo movimiento
 	public int gx; //Posicion x de la salida del laberinto
 	public int gy; //Posicion y de la salida del laberinto
+	public int nodoX;// ultima pos de nodox
+	public int nodoY;// ultuima posicion de nodoY
+
 	
 	public Robot()
-	{
-	x=4;
-	y=1;
+	{	
+	x=1;
+	y=4;
 	gx=4;
 	gy=4;
 	laberinto[y][x]="x";
 	laberinto[gy][gx]="Y";
 	mov=2;
+	nodoX=1;
+	nodoY=1;
 	
 	}
 	
@@ -71,7 +76,7 @@ public class Robot{
 	}
 	
 	
-	
+	//set y gets de mov
 	public int getmov()
 	{
 		return mov;
@@ -81,6 +86,66 @@ public class Robot{
 	{
 		mov=cambio;
 	}
+	
+	
+	//set de x y y
+	public void setx(int modx)
+	{
+		x=modx;
+	}
+	
+	public int getx()
+	{
+	return x;	
+	}
+	
+	
+	
+	public void sety(int mody)
+	{
+		y=mody;
+	}
+	
+	public int gety()
+	{
+	return y;	
+	}
+	
+	
+	
+	//set y gets de nodoX
+	public int getNodoX()
+	{
+		return nodoX;
+	}
+	
+	public void setNodoX(int modNodoX)
+	{
+		nodoX=modNodoX;
+	}
+	
+	//set y gets de nodoY
+	public int getNodoY()
+	{
+		return nodoY;
+	}
+	
+	public void setNodoY(int modNodoY)
+	{
+		nodoY=modNodoY;
+	}
+	
+	public String getLaberinto(int px,int py)
+	{
+		return laberinto[py][px];
+	}
+	
+	public void setLaberinto(int xx,int  yy)
+	{
+		laberinto[yy][xx]="1";
+	}
+	
+	
 	
 	
 	// banderas techo=0  oeste=1 sur=2 este=3
@@ -184,6 +249,14 @@ public class Robot{
 		else
 		{
 			paredder="c";
+		}
+		
+		if (laberinto[posY][posX+1].equals("Y") || laberinto[posY][posX-1].equals("Y") || laberinto[posY-1][posX].equals("Y") || laberinto[posY+1][posX].equals("Y") )
+		{
+			paredizq="x";
+			paredder="x";
+			techo="x";
+			suelo="x";
 		}
 		
 		respuesta=techo+suelo+paredizq+paredder;
