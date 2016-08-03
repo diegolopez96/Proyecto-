@@ -8,10 +8,10 @@ public class Robot{
 	//private String [][] laberinto; //laberinto para comparar en metodo analizar
 	
 	String [] [] laberinto=  {{"0","0","0","0","0","0"}, //0=pared 1=camino
+						     {"0","1","1","1","1","0"},
 						     {"0","1","0","0","0","0"},
 						     {"0","1","0","0","0","0"},
-						     {"0","1","0","0","0","0"},
-							 {"0","1","1","1","Y","0"},
+							 {"0","1","1","1","1","0"},
 							 {"0","0","0","0","0","0"}};
 	
 	
@@ -24,12 +24,13 @@ public class Robot{
 	
 	public Robot()
 	{
-	x=1;
+	x=4;
 	y=1;
 	gx=4;
 	gy=4;
-	laberinto[x][y]="x";
-	laberinto[gx][gy]="Y";
+	laberinto[y][x]="x";
+	laberinto[gy][gx]="Y";
+	mov=2;
 	
 	}
 	
@@ -76,16 +77,21 @@ public class Robot{
 		return mov;
 	}
 	
+	public void setMov(int cambio)
+	{
+		mov=cambio;
+	}
+	
 	
 	// banderas techo=0  oeste=1 sur=2 este=3
 	public void derecha(String respuesta)
 	{
 	 if (respuesta.substring(3,4).equals("c"))
 	 {
-		x= x+1;
+		x=x+1;
 		mov=3;
-		laberinto[x][y]="x";
-		laberinto[x-1][y]="1";
+		laberinto[y][x]="x";
+		laberinto[y][x-1]="1";
 	 }
 	 
 	}
@@ -96,8 +102,8 @@ public class Robot{
 	 {
 		x= x-1;
 		mov=1;
-		laberinto[x][y]="x";
-		laberinto[x+1][y]="1";
+		laberinto[y][x]="x";
+		laberinto[y][x+1]="1";
 	 }
 	 
 	}
@@ -106,11 +112,14 @@ public class Robot{
 	{
 		if (respuesta.substring(0,1).equals("c"))
 	 {
-		y= y+1;
+		y=y-1;
 		mov=0;
-		laberinto[x][y]="x";
-		laberinto[x][y-1]="1";
+		laberinto[y][x]="x";
+		laberinto[y+1][x]="1";
+		
+		
 	 }	
+	 
 	
 	}
 	
@@ -118,10 +127,12 @@ public class Robot{
 	{
 		if (respuesta.substring(1,2).equals("c"))
 	 {
-		y= y-1;
+		y= y+1;
 		mov=2;
-		laberinto[x][y]="x";
-		laberinto[x][y+1]="1";
+		laberinto[y][x]="x";
+		
+		laberinto[y-1][x]="1";
+		
 	 }
 	 
 	}
@@ -137,8 +148,9 @@ public class Robot{
 		respuesta="tsid";
 		int posX=x;
 		int posY=y;
+		
 		//arriba
-		if (laberinto[posX][posY+1].equals("0"))
+		if (laberinto[posY-1][posX].equals("0"))
 		{
 			techo="p";		
 		}
@@ -147,7 +159,7 @@ public class Robot{
 			techo="c";
 		}
 		//abajo
-		if (laberinto[posX][posY-1].equals("0"))
+		if (laberinto[posY+1][posX].equals("0"))
 		{
 			suelo="p";		
 		}
@@ -156,7 +168,7 @@ public class Robot{
 			suelo="c";
 		}
 		//izquierda
-		if (laberinto[posX-1][posY].equals("0"))
+		if (laberinto[posY][posX-1].equals("0"))
 		{
 			paredizq="p";		
 		}
@@ -165,7 +177,7 @@ public class Robot{
 			paredizq="c";
 		}
 		//derecha
-		if (laberinto[posX+1][posY].equals("0"))
+		if (laberinto[posY][posX+1].equals("0"))
 		{
 			paredder="p";		
 		}
@@ -174,9 +186,8 @@ public class Robot{
 			paredder="c";
 		}
 		
-		//respuesta=techo+suelo+paredizq+paredder;
+		respuesta=techo+suelo+paredizq+paredder;
 		return respuesta;
 	}
 		
 }
-
